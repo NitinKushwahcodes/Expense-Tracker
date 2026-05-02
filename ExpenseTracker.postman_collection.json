@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "Expense Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000", "type": "string" },
+    { "key": "expense_id", "value": "", "type": "string" },
+    { "key": "expense_id_2", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "1. Register - success",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"nitinkushwah\",\n  \"email\": \"nitin@test.com\",\n  \"password\": \"Test@1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2. Register - duplicate email",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"nitinkushwah\",\n  \"email\": \"nitin@test.com\",\n  \"password\": \"Test@1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "3. Register - weak password",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser2\",\n  \"email\": \"test2@test.com\",\n  \"password\": \"12345\"\n}"
+        }
+      }
+    },
+    {
+      "name": "4. Login - wrong email",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"wrong@test.com\",\n  \"password\": \"Test@1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "5. Login - wrong password",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nitin@test.com\",\n  \"password\": \"wrongpass\"\n}"
+        }
+      }
+    },
+    {
+      "name": "6. Login - success",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nitin@test.com\",\n  \"password\": \"Test@1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "7. Get current user",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/auth/me"
+      }
+    },
+    {
+      "name": "8. Add expense - Food",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/expenses",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Lunch at cafe\",\n  \"amount\": 250,\n  \"category\": \"Food\",\n  \"date\": \"2025-05-01\",\n  \"note\": \"Team lunch\"\n}"
+        }
+      }
+    },
+    {
+      "name": "9a. Add expense - Transport",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/expenses",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Uber to office\",\n  \"amount\": 120,\n  \"category\": \"Transport\",\n  \"date\": \"2025-05-02\"\n}"
+        }
+      }
+    },
+    {
+      "name": "9b. Add expense - Shopping",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/expenses",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"New headphones\",\n  \"amount\": 1500,\n  \"category\": \"Shopping\",\n  \"date\": \"2025-05-03\"\n}"
+        }
+      }
+    },
+    {
+      "name": "10. Get all expenses",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/expenses"
+      }
+    },
+    {
+      "name": "11. Get summary",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/expenses/summary"
+      }
+    },
+    {
+      "name": "12. Filter by category",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/expenses?category=Food",
+          "query": [{ "key": "category", "value": "Food" }]
+        }
+      }
+    },
+    {
+      "name": "13. Edit expense (update expense_id var first)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/expenses/{{expense_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 300,\n  \"note\": \"Updated amount\"\n}"
+        }
+      }
+    },
+    {
+      "name": "14. Delete expense",
+      "request": {
+        "method": "DELETE",
+        "url": "{{base_url}}/api/expenses/{{expense_id}}"
+      }
+    },
+    {
+      "name": "15. Ownership test - register second user",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"otheruser\",\n  \"email\": \"other@test.com\",\n  \"password\": \"Test@1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "15b. Ownership test - try delete first user's expense",
+      "request": {
+        "method": "DELETE",
+        "url": "{{base_url}}/api/expenses/{{expense_id_2}}"
+      }
+    },
+    {
+      "name": "16. Logout",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/auth/logout"
+      }
+    },
+    {
+      "name": "17. Access protected route after logout",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/auth/me"
+      }
+    }
+  ]
+}
