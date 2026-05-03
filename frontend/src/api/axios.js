@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://expense-tracker-75xj.onrender.com/api/health',
+  baseURL: 'https://expense-tracker-75xj.onrender.com',
   withCredentials: true,
   timeout: 10000
 });
