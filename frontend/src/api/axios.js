@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://school-management-api-ea0a.onrender.com',
+  baseURL: 'https://expense-tracker-75xj.onrender.com/api/health',
   withCredentials: true,
   timeout: 10000
 });
